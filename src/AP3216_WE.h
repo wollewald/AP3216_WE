@@ -13,16 +13,16 @@ https://wolles-elektronikkiste.de
 
 *******************************************/
 
-
 #ifndef AP3216_WE_H
 #define AP3216_WE_H
 
-#include <Wire.h>
 #if ARDUINO < 100
 #include <WProgram.h>
 #else
 #include <Arduino.h>
 #endif
+
+#include <Wire.h>
 
 #define I2C_ADDR 0x1E
 
