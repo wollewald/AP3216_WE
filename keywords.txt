@@ -1,0 +1,82 @@
+#######################################
+# Syntax Coloring Map For AP3216_WE
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+AP3216_WE	KEYWORD1
+
+# ENUM TYPES
+AP3216IntStatus	KEYWORD1
+AP3216Mode	KEYWORD1
+AP3216LuxRange	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+init	KEYWORD2
+setMode	KEYWORD2
+getIntStatus	KEYWORD2
+clearInterrupt	KEYWORD2
+setIntClearManner	KEYWORD2
+getIntClearManner	KEYWORD2
+getIRData	KEYWORD2
+irDataIsOverflowed	KEYWORD2
+getAmbientLight	KEYWORD2
+getProximity	KEYWORD2
+proximityIsValid	KEYWORD2
+objectIsNear	KEYWORD2
+setLuxRange	KEYWORD2
+setALSIntAfterNConversions	KEYWORD2
+setALSCalibrationFactor	KEYWORD2
+setALSThresholds	KEYWORD2
+setPSIntegrationTime	KEYWORD2
+setPSGain	KEYWORD2
+setPSIntAfterNConversions	KEYWORD2
+setNumberOfLEDPulses	KEYWORD2
+setLEDCurrent	KEYWORD2
+setPSInterruptMode	KEYWORD2
+setPSMeanTime	KEYWORD2
+setLEDWaitingTime	KEYWORD2
+getLEDWaitingTime	KEYWORD2
+setPSCalibration	KEYWORD2
+setPSThresholds	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+CLR_INT_BY_DATA_READ	LITERAL1
+CLR_INT_MANUALLY	LITERAL1
+LED_100	LITERAL1
+LED_66_7	LITERAL1
+LED_33_3	LITERAL1
+LED_16_7	LITERAL1
+INT_MODE_ZONE	LITERAL1
+INT_MODE_HYSTERESIS	LITERAL1
+PS_MEAN_TIME_12_5	LITERAL1
+PS_MEAN_TIME_25	LITERAL1
+PS_MEAN_TIME_37_5	LITERAL1
+PS_MEAN_TIME_50	LITERAL1
+
+# ENUM VALUES
+NO_INT	LITERAL1
+ALS_INT	LITERAL1
+PS_INT	LITERAL1
+ALS_PS_INT	LITERAL1
+POWER_DOWN	LITERAL1
+ALS	LITERAL1
+PS	LITERAL1
+ALS_PS	LITERAL1
+RESET	LITERAL1
+ALS_ONCE	LITERAL1
+PS_ONCE	LITERAL1
+ALS_PS_ONCE	LITERAL1
+RANGE_20661	LITERAL1
+RANGE_5162	LITERAL1
+RANGE_1291	LITERAL1
+RANGE_323	LITERAL1
