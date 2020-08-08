@@ -93,7 +93,7 @@ void loop() {
   unsigned int prox = myAP3216.getProximity();
   unsigned int ir = myAP3216.getIRData(); // Ambient IR light
   bool isNear = myAP3216.objectIsNear();
-  bool irIsValid = ~ myAP3216.irDataIsOverflowed();
+  bool irIsValid = !myAP3216.irDataIsOverflowed();
   
   Serial.print("Lux: "); Serial.print(als);
   Serial.print("  Proximity: "); Serial.print(prox);
