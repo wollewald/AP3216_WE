@@ -122,7 +122,7 @@ void AP3216_WE::setLuxRange(AP3216LuxRange lr){
 }
 
 void AP3216_WE::setALSIntAfterNConversions(uint8_t conv){
-	uint8_t convVal, alsConfigReg;
+	uint8_t convVal = conv;
 	convVal /= 4;
 	if(convVal == 0){
 		convVal++;
@@ -130,7 +130,7 @@ void AP3216_WE::setALSIntAfterNConversions(uint8_t conv){
 	else if (convVal >= 16){
 		convVal = 16;
 	}
-	alsConfigReg = readReg(ALS_CONFIG_REG);
+	uint8_t alsConfigReg = readReg(ALS_CONFIG_REG);
 	alsConfigReg &= 0b11110000;
 	alsConfigReg |= convVal; 
 	writeReg(ALS_CONFIG_REG, alsConfigReg);
