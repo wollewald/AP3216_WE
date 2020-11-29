@@ -7,7 +7,7 @@
 * Attention: Recommended supply voltage is 2.4 to 3.6 Volt, max 4.5 Volt
 *
 * Further information can be found on:
-* https://wolles-elektronikkiste.de/ap3216-cjmcu-3216-ambient-light-and-proximity-sensor?lang=en
+* https://wolles-elektronikkiste.de/en/ap3216-cjmcu-3216-ambient-light-and-proximity-sensor
 * 
 ***************************************************************************/
 #include <Wire.h>
