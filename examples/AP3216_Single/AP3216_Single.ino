@@ -9,7 +9,7 @@
 * The AP3216_Continuous sketch describes settings more in detail
 *
 * Further information can be found on:
-* https://wolles-elektronikkiste.de/ap3216-cjmcu-3216-ambient-light-and-proximity-sensor?lang=en
+* https://wolles-elektronikkiste.de/en/ap3216-cjmcu-3216-ambient-light-and-proximity-sensor
 * 
 ***************************************************************************/
 #include <Wire.h>
