@@ -20,6 +20,8 @@ byte ledPin=10;
 volatile bool event = false;
 
 AP3216_WE myAP3216 = AP3216_WE();
+// You can also pass a TwoWire object such as wire2:
+// AP3216_WE myAP3216 = AP3216_WE(&wire2);
 
 void setup() {
   pinMode(ledPin, OUTPUT);
