@@ -14,6 +14,8 @@
 #include <AP3216_WE.h>
 
 AP3216_WE myAP3216 = AP3216_WE();
+// You can also pass a TwoWire object such as wire2:
+// AP3216_WE myAP3216 = AP3216_WE(&wire2);
 
 void setup() {
   Serial.begin(9600);
@@ -22,16 +24,16 @@ void setup() {
 
  /*
   * Choose between the modes:
-  * ALS: ambient light continuous
-  * PS: proximity sensor continous
-  * ALS_PS: ambient Light and Proximity Sensor continuous (default)
-  * ALS_ONCE: ambient light single 
-  * PS_ONCE: proximity sensor single 
-  * ALS_PS_ONCE: ambient light and proximity sensor single
-  * POWER_DOWN: switch off
-  * RESET: reset
+  * AP3216_ALS: ambient light continuous
+  * AP3216_PS: proximity sensor continous
+  * AP3216_ALS_PS: ambient Light and Proximity Sensor continuous (default)
+  * AP3216_ALS_ONCE: ambient light single 
+  * AP3216_PS_ONCE: proximity sensor single 
+  * AP3216_ALS_PS_ONCE: ambient light and proximity sensor single
+  * AP3216_POWER_DOWN: switch off
+  * AP3216_RESET: reset
   */
-  //myAP3216.setMode(ALS_PS_ONCE); // Uncomment and adjust if needed 
+  myAP3216.setMode(AP3216_ALS_PS_ONCE); // Uncomment and adjust if needed 
   
    /*
    * Choose between 4 Lux Ranges: 
