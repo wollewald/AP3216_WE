@@ -107,8 +107,7 @@ enum AP3216LuxRange{
 
 class AP3216_WE{
     public:
-        AP3216_WE();
-        AP3216_WE(TwoWire *w);
+        AP3216_WE(TwoWire *w = &Wire);
         void init();
         void setMode(AP3216Mode);
         uint8_t getIntStatus();

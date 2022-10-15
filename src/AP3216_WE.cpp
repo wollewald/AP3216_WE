@@ -15,10 +15,6 @@ https://wolles-elektronikkiste.de
 
 #include "AP3216_WE.h"
 
-AP3216_WE::AP3216_WE(){
-    _wire = &Wire;
-}
-
 AP3216_WE::AP3216_WE(TwoWire *w){
     _wire = w;
 }
