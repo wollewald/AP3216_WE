@@ -22,7 +22,7 @@ AP3216_WE myAP3216 = AP3216_WE();
 void setup() {
   Serial.begin(9600);
   Wire.begin();
-	myAP3216.init();
+  myAP3216.init();
   myAP3216.setLuxRange(RANGE_20661);
   myAP3216.setMode(AP3216_ALS_PS_ONCE);
   delay(1000);
