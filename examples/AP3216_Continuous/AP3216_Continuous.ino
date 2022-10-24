@@ -33,7 +33,7 @@ void setup() {
   * AP3216_POWER_DOWN: switch off
   * AP3216_RESET: reset
   */
-  myAP3216.setMode(AP3216_ALS_PS_ONCE); // Uncomment and adjust if needed 
+  myAP3216.setMode(AP3216_ALS_PS); // Uncomment and adjust if needed 
   
    /*
    * Choose between 4 Lux Ranges: 
