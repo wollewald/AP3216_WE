@@ -24,70 +24,14 @@ https://wolles-elektronikkiste.de
 
 #include <Wire.h>
 
-#define I2C_ADDR 0x1E
-
-/***************************************
-* AP3216 Registers
-***************************************/
-/* System Registers */
-#define SYSTEM_CONFIGURATION_REG    0x00
-#define INTERRUPT_STATUS_REG        0x01
-#define INT_CLEAR_MANNER_REG        0x02
-#define IR_DATA_LOW_REG             0x0A
-#define IR_DATA_HIGH_REG            0x0B
-#define ALS_DATA_LOW_REG            0x0C
-#define ALS_DATA_HIGH_REG           0x0D
-#define PS_DATA_LOW_REG             0x0E
-#define PS_DATA_HIGH_REG            0x0F
-
-/* ALS Registers */
-
-#define ALS_CONFIG_REG              0x10
-#define ALS_CALIBRATION_REG         0x19
-#define ALS_LOW_THRESHOLD_LOW_REG   0x1A
-#define ALS_LOW_THRESHOLD_HIGH_REG  0x1B
-#define ALS_HIGH_THRESHOLD_LOW_REG  0x1C
-#define ALS_HIGH_THRESHOLD_HIGH_REG 0x1D
-
-/* PS Registers */
-
-#define PS_CONFIGURATION_REG        0x20
-#define PS_LED_DRIVER_REG           0x21
-#define PS_INT_FORM_REG             0x22
-#define PS_MEAN_TIME_REG            0x23
-#define PS_LED_WAITING_TIME_REG     0x24
-#define PS_CALIBRATION_L_REG        0x28
-#define PS_CALIBRATION_H_REG        0x29
-#define PS_LOW_THRESHOLD_LOW_REG    0x2A
-#define PS_LOW_THRESHOLD_HIGH_REG   0x2B
-#define PS_HIGH_THRESHOLD_LOW_REG   0x2C
-#define PS_HIGH_THRESHOLD_HIGH_REG  0x2D
-
-/****************************************
-* Other definitions
-****************************************/
-
-#define CLR_INT_BY_DATA_READ    0
-#define CLR_INT_MANUALLY        1
-#define LED_100                 3
-#define LED_66_7                2
-#define LED_33_3                1
-#define LED_16_7                0
-#define INT_MODE_ZONE           0
-#define INT_MODE_HYSTERESIS     1
-#define PS_MEAN_TIME_12_5       0
-#define PS_MEAN_TIME_25         1
-#define PS_MEAN_TIME_37_5       2
-#define PS_MEAN_TIME_50         3
-
-enum AP3216IntStatus {
+typedef enum AP3216IntStatus : uint8_t {
     NO_INT =    0,
     ALS_INT,
     PS_INT,
     ALS_PS_INT
-};
+}ap3216_int_status;
 
-typedef enum AP3216Mode {
+typedef enum AP3216Mode : uint8_t{
     AP3216_POWER_DOWN =     0b00000000,   //CHM: Continuously H-Resolution Mode
     AP3216_ALS =            0b00000001,     
     AP3216_PS =             0b00000010,
@@ -96,21 +40,78 @@ typedef enum AP3216Mode {
     AP3216_ALS_ONCE =       0b00000101,
     AP3216_PS_ONCE =        0b00000110,
     AP3216_ALS_PS_ONCE =    0b00000111
-} mode;
+} ap3216_mode;
 
-enum AP3216LuxRange{
+typedef enum AP3216LuxRange : uint8_t{
     RANGE_20661 = 0b00000000,
     RANGE_5162  = 0b00010000,
     RANGE_1291  = 0b00100000,
     RANGE_323   = 0b00110000
-};
+} ap3216_lux_range;
+
+    /****************************************
+    * Definitions
+    ****************************************/
+    static constexpr uint8_t I2C_ADDR               {0x1E};
+    static constexpr uint8_t CLR_INT_BY_DATA_READ   {0x00};
+    static constexpr uint8_t CLR_INT_MANUALLY       {0x01};
+    static constexpr uint8_t LED_100                {0x03};
+    static constexpr uint8_t LED_66_7               {0x02};
+    static constexpr uint8_t LED_33_3               {0x01};
+    static constexpr uint8_t LED_16_7               {0x00};
+    static constexpr uint8_t INT_MODE_ZONE          {0x00};
+    static constexpr uint8_t INT_MODE_HYSTERESIS    {0x01};
+    static constexpr uint8_t PS_MEAN_TIME_12_5      {0x00};
+    static constexpr uint8_t PS_MEAN_TIME_25        {0x01};
+    static constexpr uint8_t PS_MEAN_TIME_37_5      {0x02};
+    static constexpr uint8_t PS_MEAN_TIME_50        {0x03};
 
 class AP3216_WE{
     public:
-        AP3216_WE(TwoWire *w = &Wire);
+        /***************************************
+        * AP3216 Registers
+        ***************************************/
+        /* System Registers */
+        static constexpr uint8_t SYSTEM_CONFIGURATION_REG    {0x00};
+        static constexpr uint8_t INTERRUPT_STATUS_REG        {0x01};
+        static constexpr uint8_t INT_CLEAR_MANNER_REG        {0x02};
+        static constexpr uint8_t IR_DATA_LOW_REG             {0x0A};
+        static constexpr uint8_t IR_DATA_HIGH_REG            {0x0B};
+        static constexpr uint8_t ALS_DATA_LOW_REG            {0x0C};
+        static constexpr uint8_t ALS_DATA_HIGH_REG           {0x0D};
+        static constexpr uint8_t PS_DATA_LOW_REG             {0x0E};
+        static constexpr uint8_t PS_DATA_HIGH_REG            {0x0F};
+
+        /* ALS Registers */
+
+        static constexpr uint8_t ALS_CONFIG_REG              {0x10};
+        static constexpr uint8_t ALS_CALIBRATION_REG         {0x19};
+        static constexpr uint8_t ALS_LOW_THRESHOLD_LOW_REG   {0x1A};
+        static constexpr uint8_t ALS_LOW_THRESHOLD_HIGH_REG  {0x1B};
+        static constexpr uint8_t ALS_HIGH_THRESHOLD_LOW_REG  {0x1C};
+        static constexpr uint8_t ALS_HIGH_THRESHOLD_HIGH_REG {0x1D};
+
+        /* PS Registers */
+
+        static constexpr uint8_t PS_CONFIGURATION_REG        {0x20};
+        static constexpr uint8_t PS_LED_DRIVER_REG           {0x21};
+        static constexpr uint8_t PS_INT_FORM_REG             {0x22};
+        static constexpr uint8_t PS_MEAN_TIME_REG            {0x23};
+        static constexpr uint8_t PS_LED_WAITING_TIME_REG     {0x24};
+        static constexpr uint8_t PS_CALIBRATION_L_REG        {0x28};
+        static constexpr uint8_t PS_CALIBRATION_H_REG        {0x29};
+        static constexpr uint8_t PS_LOW_THRESHOLD_LOW_REG    {0x2A};
+        static constexpr uint8_t PS_LOW_THRESHOLD_HIGH_REG   {0x2B};
+        static constexpr uint8_t PS_HIGH_THRESHOLD_LOW_REG   {0x2C};
+        static constexpr uint8_t PS_HIGH_THRESHOLD_HIGH_REG  {0x2D};
+
+        /* Constructors */      
+        AP3216_WE() : _wire{&Wire} {}
+        AP3216_WE(TwoWire *w) : _wire{w} {}
+        
         void init();
         void setMode(AP3216Mode);
-        uint8_t getIntStatus();
+        ap3216_int_status getIntStatus();
         void clearInterrupt(uint8_t);
         void setIntClearManner(uint8_t);        // 0,1 (CLR_INT_BY_DATA_READ, CLR_INT_MANUALLY)
         uint8_t getIntClearManner();
@@ -120,7 +121,7 @@ class AP3216_WE{
         uint16_t getProximity();
         bool proximityIsValid();
         bool objectIsNear();
-        void setLuxRange(AP3216LuxRange);
+        void setLuxRange(ap3216_lux_range);
         void setALSIntAfterNConversions(uint8_t);   // 1,4,8,12,16,20,....,60
         void setALSCalibrationFactor(float); 
         void setALSThresholds(float, float);    // Ensure threshold/(lux range factor) does not exceed 65535
@@ -136,7 +137,7 @@ class AP3216_WE{
         void setPSCalibration(uint16_t);
         void setPSThresholds(uint16_t, uint16_t);
                     
-    private:
+    protected:
         uint16_t getALSData();
         void setALSLowThreshold(uint16_t);
         void setALSHighThreshold(uint16_t);
@@ -147,7 +148,7 @@ class AP3216_WE{
         uint8_t readReg(uint8_t);   
         
         TwoWire *_wire;
-        uint8_t intStatus;
+        ap3216_int_status intStatus;
         AP3216Mode deviceMode;
         AP3216LuxRange luxRange;
             

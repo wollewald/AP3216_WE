@@ -15,23 +15,19 @@ https://wolles-elektronikkiste.de
 
 #include "AP3216_WE.h"
 
-AP3216_WE::AP3216_WE(TwoWire *w){
-    _wire = w;
-}
-
 void AP3216_WE::init(){
     setMode(AP3216_RESET);
     setMode(AP3216_ALS_PS);
     setLuxRange(RANGE_20661);
 }
 
-void AP3216_WE::setMode(AP3216Mode d_mode){
+void AP3216_WE::setMode(ap3216_mode d_mode){
     deviceMode = d_mode;
     writeReg(SYSTEM_CONFIGURATION_REG, deviceMode);
 }
 
-uint8_t AP3216_WE::getIntStatus(){
-    intStatus = readReg(INTERRUPT_STATUS_REG) & 0b00000011;
+ap3216_int_status AP3216_WE::getIntStatus(){
+    intStatus = static_cast<ap3216_int_status>(readReg(INTERRUPT_STATUS_REG) & 0b00000011);
     return(intStatus);
 }
 
@@ -113,7 +109,7 @@ bool AP3216_WE::objectIsNear(){
     else return false; 
 }   
 
-void AP3216_WE::setLuxRange(AP3216LuxRange lr){
+void AP3216_WE::setLuxRange(ap3216_lux_range lr){
     uint8_t alsConfigReg;
     luxRange = lr;
     alsConfigReg = readReg(ALS_CONFIG_REG);
@@ -164,8 +160,8 @@ void AP3216_WE::setALSThresholds(float alsLowThresInLux, float alsHighThresInLux
             break; 
     }
     
-    alsLowThres = (uint16_t)(round(alsLowThresInLux / factor));
-    alsHighThres = (uint16_t)(round(alsHighThresInLux / factor));
+    alsLowThres = static_cast<uint16_t>(round(alsLowThresInLux / factor));
+    alsHighThres = static_cast<uint16_t>(round(alsHighThresInLux / factor));
     
     setALSLowThreshold(alsLowThres);
     setALSHighThreshold(alsHighThres); 
@@ -331,7 +327,7 @@ uint8_t AP3216_WE::readReg(uint8_t reg){
     _wire->beginTransmission(I2C_ADDR);
     _wire->write(reg);
     _wire->endTransmission();
-    _wire->requestFrom(I2C_ADDR, 1);
+    _wire->requestFrom(I2C_ADDR, static_cast<uint8_t>(1));
     regVal = _wire->read();
     return regVal;
 }
