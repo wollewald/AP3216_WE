@@ -20,7 +20,7 @@ AP3216_WE myAP3216 = AP3216_WE();
 void setup() {
   Serial.begin(9600);
   Wire.begin();
-	myAP3216.init();
+  myAP3216.init();
 
  /*
   * Choose between the modes:
