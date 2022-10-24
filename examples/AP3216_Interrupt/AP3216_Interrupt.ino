@@ -29,7 +29,7 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(interruptPin), blink, FALLING);
   Serial.begin(9600);
   Wire.begin();
-	myAP3216.init();
+  myAP3216.init();
   myAP3216.setLuxRange(RANGE_20661);
   
   /*
